@@ -1,4 +1,4 @@
-CREATE PROCEDURE ObtenerMarcas
+ALTER PROCEDURE ObtenerMarcas
 AS
 BEGIN
     SELECT nombre FROM dbo.Marca

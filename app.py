@@ -10,11 +10,11 @@ logging.basicConfig(level=logging.DEBUG)
 
 def ejecutar_stored_procedure(nombre_sp, parametros=None):
     # Configuración de la conexión a la base de datos
-    server = 'ERICKPC'
-    database = 'repuestos'
-    username = 'hola'
-    password = '12345678'
-    conn_str = f'DRIVER=ODBC Driver 17 for SQL Server;SERVER={server};DATABASE={database};UID={username};PWD={password}'
+    server = 'localhost'
+    database = 'RepuestosAbarca'
+    username = 'sa'
+    password = 'ICEPower4484'
+    conn_str = f'DRIVER={{ODBC Driver 18 for SQL Server}};SERVER={server};DATABASE={database};UID={username};PWD={password};Encrypt=no;TrustServerCertificate=no;'
 
     conn = pyodbc.connect(conn_str)
     cursor = conn.cursor()
@@ -23,11 +23,13 @@ def ejecutar_stored_procedure(nombre_sp, parametros=None):
         if parametros:
             # Construir la cadena de parámetros
             params_str = ', '.join([f"'{v}'" if isinstance(v, str) else str(v) if v is not None else 'NULL' for v in parametros.values()])
-            sql_query = f"EXEC {nombre_sp} {params_str}"
+            #sql_query = f"EXEC {nombre_sp} {params_str}"
+            sql_query = f"EXEC ModificarVehiculo 'Toyota', '1', 'Cashback', 2021, 'Manual', 1, 'Negro', 'Diesel', 120, 200, 9, '119202'"
             logging.debug(f"SQL Query: {sql_query}")
             cursor.execute(sql_query)
         else:
-            sql_query = f"EXEC {nombre_sp}"
+            #sql_query = f"EXEC {nombre_sp}"
+            sql_query = f"EXEC ModificarVehiculo 'Toyota', '1', 'Cashback', 2021, 'Manual', 1, 'Negro', 'Diesel', 120, 200, 9, '119202'"
             logging.debug(f"SQL Query: {sql_query}")
             cursor.execute(sql_query)
 
@@ -79,11 +81,12 @@ def obtener_vehiculos():
 
 
 #recibe datos en formato json
+# Recibe datos en formato JSON
 @app.route('/api/modificar_vehiculo', methods=['POST'])
 def modificar_vehiculo():
     datos = request.json
     logging.debug(f"Datos recibidos: {datos}")
-    
+
     parametros = {
         'nombreMarca': datos.get('marca'),
         'modelo': datos.get('modelo'),

@@ -1,4 +1,4 @@
-CREATE PROCEDURE ObtenerCombustible
+ALTER PROCEDURE ObtenerCombustible
 AS
 BEGIN
     SELECT nombre FROM dbo.Combustible

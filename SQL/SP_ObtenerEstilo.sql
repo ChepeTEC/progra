@@ -1,4 +1,4 @@
-CREATE PROCEDURE ObtenerEstilo
+ALTER PROCEDURE ObtenerEstilo
 AS
 BEGIN
     SELECT nombre FROM dbo.Estilo

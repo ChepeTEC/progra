@@ -1,4 +1,4 @@
-CREATE PROCEDURE ObtenerTrans
+ALTER PROCEDURE ObtenerTrans
 AS
 BEGIN
     SELECT nombre FROM dbo.Transmision
